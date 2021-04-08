@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import SignIn from './components/auth/SignIn'
+import SignUp from './components/auth/SignUp'
+import Projects from './components/projects/Projects'
+import BaseStyle from "./Style"
+import { ThemeProvider } from 'styled-components'
+import ProjectState from './context/ProjectState'
+  
+
+
+const theme= {
+  dark: "#282e41",
+  darker: "#1c202b",
+  gray: "#e1e1e1",
+  bg: "#e1e1e1",
+  wt: "white"
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <BaseStyle/>
+      <ProjectState>
+        <Router>
+          <Switch>
+              <Route exact path='/' component={ SignIn }/>
+              <Route exact path='/registro' component={ SignUp }/>
+              <Route exact path='/proyectos' component={ Projects }/>
+          </Switch>
+        </Router>
+      </ProjectState>
+    </ThemeProvider>
   );
 }
 
